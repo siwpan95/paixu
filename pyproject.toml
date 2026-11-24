@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paixu"
+version = "0.1.0"
+description = "按拼音排序文本行，剥离行首编号与标点的命令行工具"
+readme = "README.md"
+requires-python = ">=3.9"
+# SPDX 表达式（PEP 639）：与 allin 的 allin-governance 同一写法，
+# 避免 `license = { text = ... }` 在 setuptools 77+ 每次构建打弃用告警。
+license = "MIT-0"
+license-files = ["LICENSE"]
+authors = [{ name = "siwpan" }]
+keywords = ["pinyin", "sort", "chinese", "cli", "text"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Text Processing :: General",
+]
+dependencies = ["pypinyin>=0.50"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://gitee.com/siwpan/paixu"
+Repository = "https://gitee.com/siwpan/paixu"
+Issues = "https://gitee.com/siwpan/paixu/issues"
+
+[project.scripts]
+paixu = "paixu.cli:main"
+
+[tool.setuptools]
+packages = ["paixu"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

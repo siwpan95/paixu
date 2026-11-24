@@ -1,0 +1,27 @@
+# 忽略：虚拟环境 / 构建产物 / 运行期工作区 / 字节码 / 编辑器
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 运行期工作区（`paixu` 交互模式读写 ./input 与 ./output）——
+# 那是**用户的文本**，不是仓库资产：样本里曾放过 409 行歌词，公开仓不该带。
+input/
+output/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 凭据（本仓不需要任何令牌；写上是防手滑）
+.env
+*.token
+*token*.txt
