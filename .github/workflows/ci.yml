@@ -1,0 +1,33 @@
+# 最小回归护栏：push / PR 都跑，3.9 与 3.12 双版本（requires-python 的两端）。
+# 为什么只要这两条：本仓是单文件级 CLI，跑测试就够；不引 lint/type 工具链 ——
+# 加了没人看的门禁比没有更糟（allin 的「门禁写了不跑 = 没有门禁」同一条）
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 安装（含 dev extra）
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: 测试
+        run: python -m pytest -q
+      - name: CLI 冒烟（装完能跑）
+        run: |
+          paixu --version
+          printf '2. 李四\n1. 张三\n' | paixu
